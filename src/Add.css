@@ -17,51 +17,42 @@
 
 .logo {
   padding: 4%;
+  color: darkred;
 }
-.header {
-  grid-template-columns: 60% 40% 40% 30%;
-  background-color: rgb(68, 0, 114);
+.layout {
+  grid-template-columns:grid;
+  text-align: center;
+background-color: rgb(255, 251, 11);
   margin: 0px;
-  color: #ff6f61;
+  color: #00ff4c;
   padding: 1%;
 
 }
 a {
   color: inherit;
   text-decoration: none;
-  color: rgb(6, 255, 151);
+  color: rgb(179, 0, 250);
   font-size: 150%;
   font-style: initial;
 }
-img {
-  display: inherit;
-}
+
 ul {
   list-style: none;
 }
 li {
   display: inline;
   margin: 0 7% 0 1%;
-  color: rgba(0, 0, 0, 0.705);
+  color: rgb(57, 255, 31);
   font-style: inherit;
   font-style: italic;
 }
 .grid {
   display: grid;
 } 
-.color-primary {
-  color: #ff6f61;
-}
-
-.button{
-  color: rgb(255, 0, 0);
-}
+ 
 
 
 
-.heading{
-  background-color: rgb(30, 255, 60);
-  text-align: center;
-}
+
 
  

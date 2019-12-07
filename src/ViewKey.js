@@ -26,7 +26,7 @@ export default class ViewKey extends React.Component {
     this.refreshKeys();
   }
   onClickEdit = event => {
-    this.setState({ orgKeyName: event.target.name })
+    this.setState({ orgKeyName: event.target.name });
     this.setState({ keyNameBeforeUpdate: event.target.name });
     this.setState({ keyValueBeforeUpdate: event.target.value });
     this.setState({ editBtnStatus: false });
@@ -51,7 +51,9 @@ export default class ViewKey extends React.Component {
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state.keyNameBeforeUpdate+"--"+this.state.keyValueBeforeUpdate)
+    console.log(
+      this.state.keyNameBeforeUpdate + "--" + this.state.keyValueBeforeUpdate
+    );
   };
 
   deleteKey = event => {
@@ -67,18 +69,26 @@ export default class ViewKey extends React.Component {
   render() {
     return (
       <div>
-<div>
- <header class="grid header-layout">
-<h1>REACT APP</h1>    
-<ul>
-              <li><a href="home">Home</a></li>
-       <li><a href="add">Create new key value</a></li>
-      <li><a href="ViewKey">ViewKey All</a></li>
-          </ul>
-  </header>
-  
-  </div>
- <div class="env">
+        <div>
+          <header class="grid header-layout">
+            <h1>REACT APP</h1>
+            <ul>
+              <li>
+                <a href="home">Home</a>
+              </li>
+              <li>
+                <a href="add">Create new key value</a>
+              </li>
+              <li>
+                <a href="ViewKey">ViewKey All</a>
+              </li>
+              <li>
+                <a href="Uploadkey">Uploadkey</a>
+              </li>
+            </ul>
+          </header>
+        </div>
+        <div class="env">
           <h3> APP KEY LIST </h3>
           {this.state.editBtnStatus ? (
             <table>
@@ -141,13 +151,10 @@ export default class ViewKey extends React.Component {
               <button type="button" onClick={this.onClickCancel}>
                 Cancel
               </button>
-
-              
             </div>
           )}
+        </div>
       </div>
-   
-       </div>
     );
   }
 }
