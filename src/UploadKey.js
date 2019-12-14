@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./Uploadkey.css";
-import * as fs from "fs"
-import Home from "./Home"
-
+import Home from "./Home";
+import Axios from "axios";
 
 export default class uploadKey extends Component {
   constructor(props) {
@@ -13,15 +12,29 @@ export default class uploadKey extends Component {
   }
   onSubmit = event => {
     event.preventDefault();
-    let data = fs.readFile(this.state.fileName, 'utf8');
-    console.log(data)
+    console.log(this.state.filePath);
+    var reader = new FileReader();
+
+    reader.onload = function(loadedEvent) {
+      // result contains loaded file.
+      console.log(loadedEvent.target.result);
+    };
+    reader.readAsText(this.state.filePath, function(data) {
+      console.log(data);
+          const URL = "http://localhost:4000/sample";
+    Axios.post(URL, data)
+      .then(res =>{
+        console.log("infant"+ res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    });
   };
   onChange = event => {
-    debugger
-    const fileName = event.target.value;
+    const fileName = event.target.files[0];
     this.setState({ filePath: fileName });
     console.log(this.state.filePath);
-    
   };
   render() {
     return (
