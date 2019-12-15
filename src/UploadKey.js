@@ -7,29 +7,33 @@ export default class uploadKey extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filePath: ""
+      filePath: "",
+      keyData: []
     };
   }
   onSubmit = event => {
     event.preventDefault();
     console.log(this.state.filePath);
     var reader = new FileReader();
-
+var array1 = [];
     reader.onload = function(loadedEvent) {
       // result contains loaded file.
       console.log(loadedEvent.target.result);
-    };
-    reader.readAsText(this.state.filePath, function(data) {
-      console.log(data);
+      array1 = loadedEvent.target.result.split('\r\n');
           const URL = "http://localhost:4000/sample";
+          var data ={
+            data : array1
+          }
     Axios.post(URL, data)
       .then(res =>{
-        console.log("infant"+ res.data)
+        console.log( res.data)
+         this.setState({ keyData: res.data });
       })
       .catch(err =>{
         console.log(err)
-      })
-    });
+      })  
+    };
+    reader.readAsText(this.state.filePath)
   };
   onChange = event => {
     const fileName = event.target.files[0];
@@ -48,7 +52,15 @@ export default class uploadKey extends Component {
             <button type="submit" onClick={this.onSubmit}>
               Upload
             </button>
-          </form>
+            </form>
+            {this.state.keyData.map(data => (
+              <tr>
+                  <td>
+                    {data.name}
+                  </td>
+                  <td>{data.value}</td>
+                  </tr>
+              ))}
         </div>
       </div>
     );
