@@ -1,66 +1,85 @@
 import React, { Component } from "react";
-import "./Uploadkey.css";
 import Home from "./Home";
 import Axios from "axios";
-
+let fileData = [];
 export default class uploadKey extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filePath: "",
-      keyData: []
+      keyData: {
+        existing: [],
+        missing: []
+      }
     };
+    this.onSubmit = this.onSubmit.bind(this);
   }
-  onSubmit = event => {
+  onSubmit(event) {
     event.preventDefault();
-    console.log(this.state.filePath);
-    var reader = new FileReader();
-var array1 = [];
-    reader.onload = function(loadedEvent) {
-      // result contains loaded file.
-      console.log(loadedEvent.target.result);
-      array1 = loadedEvent.target.result.split('\r\n');
-          const URL = "http://localhost:4000/sample";
-          var data ={
-            data : array1
-          }
-    Axios.post(URL, data)
-      .then(res =>{
-        console.log( res.data)
-         this.setState({ keyData: res.data });
+    console.log("FileData" + fileData);
+    Axios.post("http://localhost:4000/sample", { data: fileData })
+
+      .then(res => {
+        console.log(res.data);
+        this.setState({ keyData: res.data });
       })
-      .catch(err =>{
-        console.log(err)
-      })  
-    };
-    reader.readAsText(this.state.filePath)
-  };
+      .catch(err => {
+        console.log(err);
+      });
+  }
   onChange = event => {
     const fileName = event.target.files[0];
-    this.setState({ filePath: fileName });
-    console.log(this.state.filePath);
+    var reader = new FileReader();
+    reader.onload = function(loadedEvent) {
+      console.log(loadedEvent.target.result);
+      fileData = loadedEvent.target.result.split("\r\n");
+      console.log(fileData);
+    };
+    console.log("Filename" + fileName);
+    reader.readAsText(fileName);
+    this.setState({ fileData: fileData });
+    console.log(fileData);
   };
   render() {
     return (
       <div>
         <div>
           <Home />
-          <form>
+          <form class="upload">
             <h1>File Upload</h1>
             <input type="file" onChange={this.onChange} />
             <br />
             <button type="submit" onClick={this.onSubmit}>
               Upload
             </button>
-            </form>
-            {this.state.keyData.map(data => (
+          </form>
+          <div class="file">
+            <h4>Filekey List</h4>
+            <table>
               <tr>
-                  <td>
-                    {data.name}
-                  </td>
+                <th>key</th>
+                <th>value</th>
+              </tr>
+
+              {this.state.keyData.existing.map(data => (
+                <tr>
+                  <td>{data.name}</td>
                   <td>{data.value}</td>
-                  </tr>
+                </tr>
               ))}
+            </table>
+            <h4>missing</h4>
+            <table>
+              <tr>
+                <th>key</th>
+              </tr>
+              {this.state.keyData.missing.map(data => (
+                <tr>
+                  <td>{data}</td>
+                </tr>
+              ))}
+            </table>
+          </div>
         </div>
       </div>
     );

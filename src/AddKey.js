@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import "./Add.css";
+import Home from "./Home";
 
 export default class Addkey extends Component {
   constructor() {
@@ -29,25 +29,7 @@ export default class Addkey extends Component {
     return (
       <div>
         <div>
-          <header class="grid layout">
-            <h1>REACT APP</h1>
-            <ul className="color">
-              <li>
-                <a classs href="home">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="add">Create new key value</a>
-              </li>
-              <li>
-                <a href="ViewKey">ViewKey All</a>
-              </li>
-              <li>
-                <a href="Uploadkey">Uploadkey</a>
-              </li>
-            </ul>
-          </header>
+          <Home />
         </div>
         <div className="app">
           <h2>REACT SIMPLE APP</h2>

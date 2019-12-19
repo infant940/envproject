@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import "./ViewKey.css";
+import Home from "./Home";
 
 export default class ViewKey extends React.Component {
   constructor() {
@@ -70,23 +70,7 @@ export default class ViewKey extends React.Component {
     return (
       <div>
         <div>
-          <header class="grid header-layout">
-            <h1>REACT APP</h1>
-            <ul>
-              <li>
-                <a href="home">Home</a>
-              </li>
-              <li>
-                <a href="add">Create new key value</a>
-              </li>
-              <li>
-                <a href="ViewKey">ViewKey All</a>
-              </li>
-              <li>
-                <a href="Uploadkey">Uploadkey</a>
-              </li>
-            </ul>
-          </header>
+          <Home />
         </div>
         <div class="env">
           <h3> APP KEY LIST </h3>
